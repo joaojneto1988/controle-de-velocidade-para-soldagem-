@@ -1,8 +1,8 @@
-// Constantes do Jogo (Valores Ideais)
-const IDEAL_AVANCO_MIN = 5; // mm/s
-const IDEAL_AVANCO_MAX = 7; // mm/s
-const IDEAL_OSCILACAO_MIN = 2.5; // Hz
-const IDEAL_OSCILACAO_MAX = 5.0; // Hz
+// Constantes do Jogo (Novos Valores Ideais)
+const IDEAL_AVANCO_MIN = 30; // mm/s 
+const IDEAL_AVANCO_MAX = 35; // mm/s 
+const IDEAL_OSCILACAO_MIN = 60; // Hz 
+const IDEAL_OSCILACAO_MAX = 65; // Hz 
 
 // Parâmetros de Simulação
 const PIXEL_TO_MM = 0.5; // Fator de escala: 1 pixel = 0.5 mm
@@ -176,3 +176,4 @@ function gameLoop() {
     // Lógica de atualização periódica (se houver)
     requestAnimationFrame(gameLoop);
 }
+
