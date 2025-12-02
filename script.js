@@ -37,9 +37,14 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(gameLoop);
 });
 function handleMouseMove(e) {
+    // Adição da verificação de estado do jogo
+    if (!isGameRunning) {
+        return; // Ignora o movimento do mouse se o jogo parou
+    }
+
     const currentTime = performance.now();
     const deltaTime = (currentTime - lastTime) / 1000; // Tempo em segundos
-    if (deltaTime === 0) return; // Evita divisão por zero
+    if (deltaTime === 0) return;
 
     // 1. Cálculo da Velocidade de Avanço (Linear no eixo X)
     const deltaX_pixels = e.offsetX - lastX;
@@ -88,8 +93,15 @@ function handleMouseMove(e) {
         totalTimeInIdealZone += deltaTime;
     }
     updateScore();
-}
 
+    // 5. Lógica de Parada (Fim do Jogo)
+    // O jogo para quando o centro da tocha (lastX) atinge 95% da largura do canvas
+    const END_THRESHOLD = canvas.width * 0.95;
+    if (lastX >= END_THRESHOLD) {
+        isGameRunning = false;
+        showFinalScore(); // Chama a nova função de pontuação
+    }
+}
 // Função auxiliar para verificar a zona ideal
 function isIdeal(value, min, max) {
     return value >= min && value <= max;
@@ -176,4 +188,5 @@ function gameLoop() {
     // Lógica de atualização periódica (se houver)
     requestAnimationFrame(gameLoop);
 }
+
 
