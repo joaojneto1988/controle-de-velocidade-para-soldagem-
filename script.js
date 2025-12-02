@@ -27,8 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
     lastY = canvas.height / 2;
     lastTime = performance.now();
     
-    // Desenhar a linha base
-    drawGuideLine();
+   // Desenhar as linhas guia (agora incluindo a oscilação)
+drawGuideLines();
     
     // Iniciar a captura de movimento
     canvas.addEventListener('mousemove', handleMouseMove);
@@ -107,13 +107,39 @@ function isIdeal(value, min, max) {
     return value >= min && value <= max;
 }
 // Desenha a linha base (para guiar o usuário)
-function drawGuideLine() {
+function drawGuideLines() {
+    // Parâmetros do Guia de Oscilação
+    const GUIDE_AMPLITUDE = 15; // Amplitude máxima da onda em pixels (largura do movimento)
+    const GUIDE_FREQUENCY_X = 0.08; // Frequência da onda ao longo do eixo X (ajuste a repetição)
+    const CENTER_Y = canvas.height / 2;
+    
+    // Desenhar a Linha-Base Simples (Fundo)
     ctx.strokeStyle = '#555';
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(0, canvas.height / 2);
-    ctx.lineTo(canvas.width, canvas.height / 2);
+    ctx.moveTo(0, CENTER_Y);
+    ctx.lineTo(canvas.width, CENTER_Y);
     ctx.stroke();
+
+    // Desenhar a Onda Senoidal (Guia de Oscilação)
+    ctx.strokeStyle = '#44A044'; // Cor verde para o guia de movimento ideal
+    ctx.lineWidth = 2;
+    ctx.setLineDash([5, 5]); // Linha tracejada para não confundir com o cordão de solda
+    
+    ctx.beginPath();
+    // Começa no início do canvas
+    ctx.moveTo(0, CENTER_Y);
+
+    // Itera por toda a largura do canvas para desenhar a onda
+    for (let x = 0; x < canvas.width; x++) {
+        // Cálculo da posição Y usando a função seno (para criar a onda)
+        // O valor 'x * GUIDE_FREQUENCY_X' controla quantos ciclos cabem no canvas
+        const y = CENTER_Y + GUIDE_AMPLITUDE * Math.sin(x * GUIDE_FREQUENCY_X);
+        ctx.lineTo(x, y);
+    }
+    
+    ctx.stroke();
+    ctx.setLineDash([]); // Resetar o tracejado para que o cordão de solda seja sólido
 }
 
 function calculateCordaoWidth(v_avanço, f_oscilacao) {
@@ -217,4 +243,5 @@ function showFinalScore() {
     ctx.fillText(`Pontuação Final de Qualidade: ${finalQuality}%`, canvas.width / 2, canvas.height / 2);
     ctx.fillText(message, canvas.width / 2, canvas.height / 2 + 40);
 }
+
 
