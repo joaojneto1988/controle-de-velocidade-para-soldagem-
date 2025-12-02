@@ -1,0 +1,39 @@
+body {
+    background-color: #222;
+    color: #fff;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#game-container {
+    display: grid;
+    grid-template-areas:
+        "hud canvas"
+        "score canvas";
+    gap: 20px;
+}
+
+#welding-canvas {
+    grid-area: canvas;
+    border: 3px solid #666;
+    background-color: #333; /* A peça de metal */
+    cursor: crosshair; /* Sugere controle da tocha */
+}
+
+#hud-panel {
+    grid-area: hud;
+    /* Estilos para os indicadores, as "faixas verdes" seriam definidas aqui */
+}
+
+#score-panel {
+    grid-area: score;
+    /* Estilos para o painel de pontuação */
+}
+
+/* Classes para feedback de erro (ex: avanço muito rápido/lento) */
+.too-fast { color: red; }
+.too-slow { color: orange; }
+.ideal { color: limegreen; }
