@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lastY = canvas.height / 2;
     lastTime = performance.now();
     
-   // Desenhar as linhas guia (agora incluindo a oscilação)
+   // Desenhar as linhas guia 
 drawGuideLines();
     
     // Iniciar a captura de movimento
@@ -243,5 +243,6 @@ function showFinalScore() {
     ctx.fillText(`Pontuação Final de Qualidade: ${finalQuality}%`, canvas.width / 2, canvas.height / 2);
     ctx.fillText(message, canvas.width / 2, canvas.height / 2 + 40);
 }
+
 
 
