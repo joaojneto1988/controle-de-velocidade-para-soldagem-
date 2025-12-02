@@ -1,8 +1,8 @@
 // Constantes do Jogo (Novos Valores Ideais)
 const IDEAL_AVANCO_MIN = 30; // mm/s 
-const IDEAL_AVANCO_MAX = 35; // mm/s 
-const IDEAL_OSCILACAO_MIN = 60; // Hz 
-const IDEAL_OSCILACAO_MAX = 65; // Hz 
+const IDEAL_AVANCO_MAX = 60; // mm/s 
+const IDEAL_OSCILACAO_MIN = 20; // Hz 
+const IDEAL_OSCILACAO_MAX = 40; // Hz 
 
 // Parâmetros de Simulação
 const PIXEL_TO_MM = 0.5; // Fator de escala: 1 pixel = 0.5 mm
@@ -243,6 +243,7 @@ function showFinalScore() {
     ctx.fillText(`Pontuação Final de Qualidade: ${finalQuality}%`, canvas.width / 2, canvas.height / 2);
     ctx.fillText(message, canvas.width / 2, canvas.height / 2 + 40);
 }
+
 
 
 
