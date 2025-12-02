@@ -188,5 +188,34 @@ function gameLoop() {
     // Lógica de atualização periódica (se houver)
     requestAnimationFrame(gameLoop);
 }
+function showFinalScore() {
+    // Certifica-se de que o cálculo da pontuação está finalizado
+    updateScore(); 
+    
+    const qualityPercentage = (totalTimeInIdealZone / totalTimePlayed) * 100 || 0;
+    const finalQuality = Math.min(100, qualityPercentage).toFixed(1);
+    
+    // Exemplo de feedback visual para o usuário
+    let message = '';
+    if (finalQuality >= 90) {
+        message = "Excelente! Manteve a consistência perfeita.";
+    } else if (finalQuality >= 70) {
+        message = "Bom trabalho! Pequenos ajustes e estará ideal.";
+    } else {
+        message = "Precisa de mais prática na coordenação de avanço e oscilação.";
+    }
+
+    // Exibe o resultado final de forma clara no canvas ou em um modal
+    ctx.font = '30px Arial';
+    ctx.fillStyle = 'white';
+    ctx.textAlign = 'center';
+    
+    // Limpa a área do canvas para a mensagem de fim de jogo
+    ctx.fillRect(0, 0, canvas.width, canvas.height); 
+    
+    ctx.fillText("--- PERCURSO FINALIZADO ---", canvas.width / 2, canvas.height / 2 - 40);
+    ctx.fillText(`Pontuação Final de Qualidade: ${finalQuality}%`, canvas.width / 2, canvas.height / 2);
+    ctx.fillText(message, canvas.width / 2, canvas.height / 2 + 40);
+}
 
 
