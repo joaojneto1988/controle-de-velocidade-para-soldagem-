@@ -276,3 +276,5 @@ function showFinalScore() {
     ctx.textAlign = 'center';
     ctx.fillText("SIMULAÇÃO CONCLUÍDA!", canvas.width / 2, canvas.height / 2);
 }
+
+}
